@@ -10,7 +10,9 @@ buildscript {
     }
 }
 
+apply from: "${getRootDir()}/java.gradle"
 apply plugin: 'spring-boot'
+
 jar {
     baseName = 'flashcards'
     version = '0.0.1-SNAPSHOT'

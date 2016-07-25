@@ -22,7 +22,6 @@ node {
     nodeModulesDir = file("${project.projectDir}")
 }
 
-
 configurations {
     compile
 }
@@ -43,17 +42,13 @@ task clean(type: Delete) {
     delete "build"
 }
 
-task build(type: NpmTask) {
+task test(type: NpmTask) {
+    args = ['test']
+}
+
+task build(dependsOn: test, type: NpmTask) {
     args = ['run', 'build']
 }
-
-task run(type: NpmTask) {
-    args = ['run', 'watch']
-}
-
-//task test(type: NpmTask) {
-//    args = ['test']
-//}
 
 build.dependsOn npmInstall
 test.dependsOn npmInstall
