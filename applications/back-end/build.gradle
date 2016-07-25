@@ -18,5 +18,14 @@ jar {
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
+    compile project(path: ":applications/front-end", configuration: "compile")
+
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
+
+task copyFrontEnd(type: Copy) {
+    from project(':applications/front-end').buildDir
+    into "build/resources/main/public/"
+}
+
+processResources.dependsOn('copyFrontEnd')
